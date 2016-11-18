@@ -19,8 +19,14 @@ class ClienteController extends Controller
 
 
 
-    public function cadastrar()
+    public function cadastrar(Request $request)
     {
+        if($request->isMethod('post'))
+        {
+            //dd($request->all());
+           return ($request->all());
+        }
+
         $clienteModel = new ClienteModel();
         $clienteModel->novoRegistro();
     }

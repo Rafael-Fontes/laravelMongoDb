@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
+
 class ClienteModel extends Model
 {
 
@@ -16,7 +17,7 @@ class ClienteModel extends Model
 
 
     /**
-     * @method get
+     * @verbo GET
      * @param array $filtro
      * @return object
      */
@@ -31,7 +32,7 @@ class ClienteModel extends Model
 
 
     /**
-     * @method get
+     * @verbo GET
      * @param integer $id
      * @return object
      */
@@ -45,11 +46,11 @@ class ClienteModel extends Model
 
 
     /**
-     * @method post
+     * @verbo POST
      * @param ClienteModel $cliente
      * @return object
      */
-    public function novoRegistro(ClienteModel $clientev= null)
+    public function novoRegistro(ClienteModel $cliente= null)
     {
         ClienteModel::create([
             'nome' => 'Cliente 01'
@@ -61,7 +62,7 @@ class ClienteModel extends Model
 
 
     /**
-     * @method delet
+     * @verbo DELETE
      * @param integer $id
      * @return boolean
      */
@@ -73,7 +74,7 @@ class ClienteModel extends Model
 
 
     /**
-     * @method delet
+     * @verbo DELETE
      * @param integer $data
      * @return boolean
      */
