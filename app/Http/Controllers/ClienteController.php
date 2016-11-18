@@ -23,6 +23,17 @@ class ClienteController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $this->validate($request, [
+                'nome'  => 'required',
+                'email' => 'required',
+            ]);
+
+            if($this->validate()->fails()){ return 'oi';
+                $errors = $this->validate()->errors();
+
+                return $errors->toJson();
+            }
+
             //dd($request->all());
            return ($request->all());
         }

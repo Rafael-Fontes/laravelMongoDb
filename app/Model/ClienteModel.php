@@ -53,7 +53,8 @@ class ClienteModel extends Model
     public function novoRegistro(ClienteModel $cliente= null)
     {
         ClienteModel::create([
-            'nome' => 'Cliente 01'
+            'nome' => 'Cliente 01',
+            'email' => 'email@live.com'
         ]);
     }
 
