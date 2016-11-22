@@ -28,9 +28,23 @@ class ClienteController extends Controller
 
 
 
-    public function index()
+    public function listar()
     {
         return $this->repository->buscarTodos();
+    }
+
+
+
+
+    
+    /**
+     * @param alphanumeric $id
+     */
+    public function listarUm($id)
+    {
+        if($id) {
+            return $this->repository->buscarUm($id);
+        }
     }
 
 
@@ -56,6 +70,7 @@ class ClienteController extends Controller
            dd($clienteBusca);
         }
     }
+
 
 
 

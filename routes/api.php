@@ -18,6 +18,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::get('cliente', 'ClienteController@index');
-Route::post('cliente', 'ClienteController@cadastrar');
-Route::put('cliente', 'ClienteController@atualizar');
+Route::group(['prefix' => 'v1'], function ()
+{
+    Route::get('cliente', 'ClienteController@listar');
+    Route::get('cliente/{id}', 'ClienteController@listarUm');
+
+    Route::post('cliente', 'ClienteController@cadastrar');
+    Route::put('cliente', 'ClienteController@atualizar');
+});

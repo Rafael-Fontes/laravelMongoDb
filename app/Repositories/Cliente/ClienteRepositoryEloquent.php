@@ -52,6 +52,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
     public function buscarUm($id)
     {
+        $id = filter_var($id, FILTER_SANITIZE_STRING);
         if(!empty($id)) {
             return $this->model->where('_id', $id)->first();
         }
