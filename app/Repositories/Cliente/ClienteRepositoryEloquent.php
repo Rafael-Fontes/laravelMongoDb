@@ -53,7 +53,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
     public function buscarUm($id)
     {
         if(!empty($id)) {
-            return $this->model->where('_id', $id);
+            return $this->model->where('_id', $id)->first();
         }
     }
 
@@ -63,7 +63,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
     public function cadastrar(Array $cliente = [])
     {
-        $this->model->create($cliente);
+        return $this->model->create($cliente);
     }
 
 

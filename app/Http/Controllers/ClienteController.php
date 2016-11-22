@@ -39,7 +39,7 @@ class ClienteController extends Controller
 
     public function cadastrar(ClienteRequest $request)
     {
-        return $this->repository->novoRegistro($request->all());
+        return $this->repository->cadastrar($request->all());
     }
 
 
@@ -48,8 +48,13 @@ class ClienteController extends Controller
 
     public function atualizar(ClienteRequest $request)
     {
-        $clienteId = $request->input('id');
-        dd($clienteId);
+        $clienteId = filter_var($request->input('id'), FILTER_SANITIZE_STRING);
+
+        if(!empty($clienteId))
+        {
+            $clienteBusca = $this->repository->buscarUm($clienteId);
+           dd($clienteBusca);
+        }
     }
 
 
