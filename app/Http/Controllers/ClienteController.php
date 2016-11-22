@@ -2,43 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClienteRequest;
+use App\Repositories\Cliente\ClienteRepository;
 use Illuminate\Http\Request;
-use App\Model\ClienteModel;
 
 
 class ClienteController extends Controller
 {
-    public function index()
-    {
-        $clienteModel = new ClienteModel();
-        return $clienteModel->buscarTodos();
 
-        //return "Ola mundo!";
+    /**
+     * @var ClienteRepository
+     */
+    protected $repository;
+
+
+
+    /**
+     * @param ClienteRepository $repository
+     */
+    function __construct(ClienteRepository $repository)
+    {
+        $this->repository = $repository;
     }
 
 
 
 
-    public function cadastrar(Request $request)
+
+    public function index()
     {
-        if($request->isMethod('post'))
-        {
-            $this->validate($request, [
-                'nome'  => 'required',
-                'email' => 'required',
-            ]);
+        return $this->repository->buscarTodos(['paginado' => true, 'qtd' => 2]);
+    }
 
-            if($this->validate()->fails()){ return 'oi';
-                $errors = $this->validate()->errors();
 
-                return $errors->toJson();
-            }
 
-            //dd($request->all());
-           return ($request->all());
-        }
 
-        $clienteModel = new ClienteModel();
-        $clienteModel->novoRegistro();
+
+    public function cadastrar(ClienteRequest $request)
+    {
+        return $this->repository->novoRegistro($request->all());
     }
 }

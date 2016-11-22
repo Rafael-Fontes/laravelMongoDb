@@ -163,6 +163,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -178,7 +182,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Jenssegers\Mongodb\MongodbServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
