@@ -41,23 +41,39 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
 
 
-    public function buscarTodos(Array $paginacao = ['paginado' => true, 'qtd' => 15], Array $filtro = [])
+    public function buscarTodos()
     {
-        if($paginacao['paginado'])
-            return $this->model->paginate($paginacao['qtd']);
-
-        return $this->model->all();
+        return $this->model->paginate(10);
     }
 
 
 
 
 
-    public function novoRegistro($cliente = null)
+    public function buscarUm($id)
     {
-        $this->model->create([
-            'nome'  => 'Cliente 01',
-            'email' => 'emailDoCliente@live.com',
-        ]);
+        if(!empty($id)) {
+            return $this->model->where('_id', $id);
+        }
+    }
+
+
+
+
+
+    public function cadastrar(Array $cliente = [])
+    {
+        $this->model->create($cliente);
+    }
+
+
+
+
+
+    public function atualizar(Array $cliente = [])
+    {
+        if(isset($cliente['_id'])) {
+
+        }
     }
 }

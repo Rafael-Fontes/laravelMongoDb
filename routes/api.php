@@ -20,3 +20,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('cliente', 'ClienteController@index');
 Route::post('cliente', 'ClienteController@cadastrar');
+Route::put('cliente', 'ClienteController@atualizar');

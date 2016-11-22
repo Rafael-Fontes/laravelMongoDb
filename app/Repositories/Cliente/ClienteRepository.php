@@ -16,7 +16,7 @@ interface ClienteRepository extends RepositoryInterface
      * @param array $filtro
      * @return object
      */
-    public function buscarTodos(Array $filtro = []);
+    //public function buscarTodos(Array $filtro = []);
 
 
 

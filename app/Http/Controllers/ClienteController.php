@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClienteRequest;
 use App\Repositories\Cliente\ClienteRepository;
-use Illuminate\Http\Request;
 
 
 class ClienteController extends Controller
@@ -31,7 +30,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        return $this->repository->buscarTodos(['paginado' => true, 'qtd' => 2]);
+        return $this->repository->buscarTodos();
     }
 
 
@@ -41,5 +40,23 @@ class ClienteController extends Controller
     public function cadastrar(ClienteRequest $request)
     {
         return $this->repository->novoRegistro($request->all());
+    }
+
+
+
+
+
+    public function atualizar(ClienteRequest $request)
+    {
+        $clienteId = $request->input('id');
+        dd($clienteId);
+    }
+
+
+
+
+    public function deletar($id)
+    {
+
     }
 }
