@@ -28,6 +28,11 @@ class ClienteController extends Controller
 
 
 
+    /**
+     * @url     meu.dominio/api/v1/clientes
+     * @url     meu.dominio/api/v1/clientes/filtros?limit=25&offset=40
+     * @return object
+     */
     public function listar()
     {
         return $this->repository->buscarTodos();
@@ -36,13 +41,21 @@ class ClienteController extends Controller
 
 
 
-    
+
     /**
-     * @param alphanumeric $id
+     * @url   meu.dominio/api/v1/clientes/1
+     * @url   meu.dominio/api/v1/clientes/1/enderecos
+     * @url   meu.dominio/api/v1/clientes/1/enderecos/1
+     * @url   meu.dominio/api/v1/clientes/1/telefones/
+     * @url   meu.dominio/api/v1/clientes/1/telefones/1
+     *
+     * @method GET
+     * @param  alphanumeric $id
+     * @return object
      */
     public function listarUm($id)
     {
-        if($id) {
+        if(!empty($id)) {
             return $this->repository->buscarUm($id);
         }
     }
@@ -51,6 +64,15 @@ class ClienteController extends Controller
 
 
 
+    /**
+     * @url   meu.dominio/api/v1/clientes
+     * @url   meu.dominio/api/v1/clientes/id/categorias
+     * @url   meu.dominio/api/v1/clientes/id/telefones
+     *
+     * @method POST
+     * @param  ClienteRequest $request
+     * @return object
+     */
     public function cadastrar(ClienteRequest $request)
     {
         return $this->repository->cadastrar($request->all());
@@ -72,9 +94,10 @@ class ClienteController extends Controller
     }
 
 
-
-
-
+    /**
+     * @url
+     * @param $id
+     */
     public function deletar($id)
     {
 
