@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Http\Request;
 use App\Http\Requests\ClienteRequest;
 use App\Repositories\Cliente\ClienteRepository;
+
 
 
 class ClienteController extends Controller
@@ -30,12 +33,16 @@ class ClienteController extends Controller
 
     /**
      * @url     meu.dominio/api/v1/clientes
-     * @url     meu.dominio/api/v1/clientes/filtros?limit=25&offset=40
+     * @url     meu.dominio/api/v1/clientes?page=1&limit=25
+     * @url     meu.dominio/api/v1/clientes?fields=campo1,campo2,campo3
+     *
+     * @method GET
+     * @param  Request $request
      * @return object
      */
-    public function listar()
+    public function listar(Request $request)
     {
-        return $this->repository->buscarTodos();
+        return $this->repository->buscarTodos($request->all());
     }
 
 

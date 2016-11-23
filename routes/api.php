@@ -20,9 +20,9 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1'], function ()
 {
-    Route::get('cliente', 'ClienteController@listar');
-    Route::get('cliente/{id}', 'ClienteController@listarUm');
+    Route::get('clientes', 'ClienteController@listar');
+    Route::get('clientes/{id}', 'ClienteController@listarUm');
 
-    Route::post('cliente', 'ClienteController@cadastrar');
-    Route::put('cliente', 'ClienteController@atualizar');
+    Route::post('clientes', 'ClienteController@cadastrar');
+    Route::put('clientes', 'ClienteController@atualizar');
 });

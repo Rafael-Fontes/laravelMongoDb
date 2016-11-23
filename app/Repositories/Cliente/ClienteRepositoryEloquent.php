@@ -41,15 +41,33 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
 
 
-    public function buscarTodos()
+    /**
+     * @param array $filtros [page, limit, fields]
+     * @return object
+     */
+    public function buscarTodos(Array $filtros = [])
     {
-        return $this->model->paginate(10);
+        $limit = 20;
+        if(isset($filtros['limit']) && !empty($filtros['limit']))
+            $limit = (int) $filtros['limit'];
+
+        $fields = '*';
+        if(isset($filtros['fields']) && !empty($filtros['fields']))
+            $fields = filter_var($filtros['fields'], FILTER_SANITIZE_STRING);
+
+        return $this->model
+                    ->select($fields)
+                    ->paginate($limit);
     }
 
 
 
 
 
+    /**
+     * @param alphanumeric $id
+     * @return object
+     */
     public function buscarUm($id)
     {
         $id = filter_var($id, FILTER_SANITIZE_STRING);
