@@ -19,6 +19,7 @@ class ClienteController extends Controller
 
 
 
+
     /**
      * @param ClienteRepository $repository
      */
@@ -35,6 +36,8 @@ class ClienteController extends Controller
      * @url     meu.dominio/api/v1/clientes
      * @url     meu.dominio/api/v1/clientes?page=1&limit=25
      * @url     meu.dominio/api/v1/clientes?fields=campo1,campo2,campo3
+     * @url     meu.dominio/api/v1/clientes?sort=-campo01,campo02   (-campo01: descendente, campo01: ascendente)
+     * @url     meu.dominio/api/v1/clientes?situacao=ativo&criado>=data&deletado!=sim
      *
      * @method GET
      * @param  Request $request
@@ -89,6 +92,9 @@ class ClienteController extends Controller
 
 
 
+    /**
+     * @param ClienteRequest $request
+     */
     public function atualizar(ClienteRequest $request)
     {
         $clienteId = filter_var($request->input('id'), FILTER_SANITIZE_STRING);
@@ -99,6 +105,9 @@ class ClienteController extends Controller
            dd($clienteBusca);
         }
     }
+
+
+
 
 
     /**
