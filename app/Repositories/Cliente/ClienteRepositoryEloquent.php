@@ -55,6 +55,15 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
         if(isset($filtros['fields']) && !empty($filtros['fields']))
             $fields = filter_var($filtros['fields'], FILTER_SANITIZE_STRING);
 
+
+        if(isset($filtros['sort']) && !empty($filtros['sort']))
+        {
+            $arraySort = $this->ordenar($filtros['sort']);
+            foreach ($arraySort as $chave => $valor){
+
+            }
+        }
+
         return $this->model
                     ->select($fields)
                     ->paginate($limit);
@@ -93,6 +102,34 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
     {
         if(isset($cliente['_id'])) {
 
+        }
+    }
+
+
+
+
+
+    /**
+     * @param string $dados
+     * @return array
+     */
+    private function ordenar($dados)
+    {
+        if(!empty($dados))
+        {
+            $strigHigienizada = filter_var($dados, FILTER_SANITIZE_STRING);
+            $arraySort        = explode(',', $strigHigienizada);
+            $arrayDados       = [];
+
+            foreach ($arraySort as $sort)
+            {
+                $ordem = (substr($sort, 0, 1) == '-') ? 'DESC' : 'ASC';
+                $campo = str_replace('-', '', $sort);
+
+                $arrayDados[$campo] = $ordem;
+            }
+
+            return $arrayDados;
         }
     }
 }
