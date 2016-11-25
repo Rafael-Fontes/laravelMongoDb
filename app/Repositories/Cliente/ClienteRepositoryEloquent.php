@@ -60,7 +60,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
         {
             $arraySort = $this->ordenar($filtros['sort']);
             foreach ($arraySort as $chave => $valor){
-
+                $this->model->orderBy('nome', 'DESC');
             }
         }
 
