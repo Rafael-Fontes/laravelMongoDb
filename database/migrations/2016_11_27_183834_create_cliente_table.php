@@ -4,12 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientesCollection extends Migration
+class CreateClienteTable extends Migration
 {
-
-    protected $connection = 'mongodb';
-
-
     /**
      * Run the migrations.
      *
@@ -17,10 +13,17 @@ class CreateClientesCollection extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $collection) {
-            $collection->string('nome');
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->bigincrements('id');
+            $table->string('nome');
+            $table->string('email');
+            $table->timestamps();
         });
     }
+
+
+
+
 
     /**
      * Reverse the migrations.

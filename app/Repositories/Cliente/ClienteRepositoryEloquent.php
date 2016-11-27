@@ -56,7 +56,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
         if(isset($filtros['fields']) && !empty($filtros['fields']))
             $fields = filter_var($filtros['fields'], FILTER_SANITIZE_STRING);
 
-
+        $this->montarWhere($filtros);
 
         return $this->model
                     ->select($fields)
@@ -139,16 +139,16 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
 
     /**
-     * @param string $dados
+     * @param array $dados
      * @return array
      */
     private function montarWhere($dados)
     {
         if(!empty($dados))
         {
-            $strigHigienizada = filter_var($dados, FILTER_SANITIZE_STRING);
+            //$strigHigienizada = filter_var($dados, FILTER_SANITIZE_STRING);
 
-
+            dd($dados);
         }
     }
 }
