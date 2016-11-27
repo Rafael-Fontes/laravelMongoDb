@@ -2,7 +2,7 @@
 
 namespace App\Model\Cliente;
 
-use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -11,9 +11,9 @@ class Cliente extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $connection = 'mongodb';
-    protected $collection = 'clientes';
-    protected $fillable   = ['nome', 'email'];
+
+    protected $table    = 'clientes';
+    protected $fillable = ['nome', 'email'];
 
 
     const CREATED_AT = 'criado';

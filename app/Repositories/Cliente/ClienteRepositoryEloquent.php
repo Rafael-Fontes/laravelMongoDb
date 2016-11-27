@@ -6,6 +6,7 @@ namespace App\Repositories\Cliente;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Cliente\ClienteRepository;
+use Illuminate\Database\Query\Builder;
 use App\Model\Cliente\Cliente;
 
 /**
@@ -42,7 +43,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
 
     /**
-     * @param array $filtros [page, limit, fields]
+     * @param array $filtros [page, limit, fields, sort]
      * @return object
      */
     public function buscarTodos(Array $filtros = [])
@@ -56,16 +57,15 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
             $fields = filter_var($filtros['fields'], FILTER_SANITIZE_STRING);
 
 
-        if(isset($filtros['sort']) && !empty($filtros['sort']))
-        {
-            $arraySort = $this->ordenar($filtros['sort']);
-            foreach ($arraySort as $chave => $valor){
-                $this->model->orderBy('nome', 'DESC');
-            }
-        }
 
         return $this->model
                     ->select($fields)
+                    //->where(['nome', '=', 'Homer'])
+                    /*->where(function($query) use ($condicao) {
+                        foreach($condicao as $key => $value){
+                            $query->where($key, '=', $value);
+                        }
+                    })*/
                     ->paginate($limit);
     }
 
@@ -74,14 +74,15 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
 
 
     /**
-     * @param alphanumeric $id
+     * @param integer $id
      * @return object
      */
     public function buscarUm($id)
     {
-        $id = filter_var($id, FILTER_SANITIZE_STRING);
-        if(!empty($id)) {
-            return $this->model->where('_id', $id)->first();
+        $id = (int) $id;
+        if(!empty($id))
+        {
+            return $this->model->where('id', $id)->get();
         }
     }
 
@@ -113,7 +114,7 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
      * @param string $dados
      * @return array
      */
-    private function ordenar($dados)
+    private function montarSort($dados)
     {
         if(!empty($dados))
         {
@@ -130,6 +131,24 @@ class ClienteRepositoryEloquent extends BaseRepository implements ClienteReposit
             }
 
             return $arrayDados;
+        }
+    }
+
+
+
+
+
+    /**
+     * @param string $dados
+     * @return array
+     */
+    private function montarWhere($dados)
+    {
+        if(!empty($dados))
+        {
+            $strigHigienizada = filter_var($dados, FILTER_SANITIZE_STRING);
+
+
         }
     }
 }
